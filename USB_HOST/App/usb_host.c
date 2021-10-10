@@ -35,6 +35,7 @@
 char USBHPath[4];   /* USBH logical drive path */
 FATFS USBHFatFS;    /* File system object for USBH logical drive */
 FRESULT fresult;  // result
+void GetFileList(void);
 /* USER CODE END PV */
 
 /* USER CODE BEGIN PFP */
@@ -110,8 +111,10 @@ static void USBH_UserProcess  (USBH_HandleTypeDef *phost, uint8_t id)
 
   case HOST_USER_CLASS_ACTIVE:
   {
-	  FRESULT res = f_mount(&USBHFatFS,USBHPath,0);
 	  Appli_state = APPLICATION_READY;
+
+	  fresult = f_mount(&USBHFatFS, USBHPath, 1);
+//	  GetFileList();
   }
   break;
 
